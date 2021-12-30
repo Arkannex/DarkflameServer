@@ -198,6 +198,12 @@ std::vector<ItemSetPassiveAbility> ItemSetPassiveAbility::FindAbilities(uint32_t
 
         break;
     }
+   	//Non-Faction Gear
+	case ItemSetPassiveAbilityID::BatLord: {
+		abilities.emplace_back(PassiveAbilityTrigger::EnemySmashed, parent, itemSet);
+
+		break;
+	}
     default:
         break;
     }
@@ -320,6 +326,12 @@ void ItemSetPassiveAbility::OnEnemySmshed()
         destroyableComponent->Imagine(3);
         break;
     }
+    //Non-Faction Gear
+	case ItemSetPassiveAbilityID::BatLord: {
+		if (equippedCount < 4) return;
+		destroyableComponent->Heal(3);
+		break;
+	}
 
     default:
         break;
